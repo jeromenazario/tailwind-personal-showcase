@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jerome — Personal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --tan:   #d9c9b0;
+      --rust:  #b5522a;
+      --dark:  #1e1a16;
+      --mid:   #7a6a58;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    .serif { font-family: 'Playfair Display', serif; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      border-bottom: 1px solid var(--tan);
+      background: var(--cream);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-style: italic; letter-spacing: -0.03em;
+    }
+    .nav-links { display: flex; gap: 2rem; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .nav-links a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--rust); }
+    .nav-issue { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--tan); text-transform: uppercase; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--tan);
+    }
+    .hero-left {
+      padding: 10rem 3rem 4rem;
+      border-right: 1px solid var(--tan);
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .hero-right {
+      padding: 10rem 3rem 4rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .issue-label {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 1rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 0.95; font-weight: 900;
+    }
+    .hero-title em { font-style: italic; color: var(--rust); }
+    .pull-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-style: italic; line-height: 1.5;
+      color: var(--mid);
+      border-left: 2px solid var(--rust);
+      padding-left: 1.2rem;
+    }
+    .hero-meta { font-size: 0.6rem; letter-spacing: 0.1em; color: var(--tan); }
+    .tag-strip { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 2rem; }
+    .tag {
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid var(--tan); padding: 4px 10px; color: var(--mid);
+    }
+
+    /* RULE */
+    .rule {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.8rem 2.5rem;
+      border-bottom: 1px solid var(--tan);
+      font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan);
+    }
+    .rule-line { flex: 1; height: 1px; background: var(--tan); }
+
+    section { border-bottom: 1px solid var(--tan); }
+
+    /* PASSIONS */
+    .passions-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; }
+    .passion-cell {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--tan);
+    }
+    .passion-cell:last-child { border-right: none; }
+    .passion-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; font-weight: 900; line-height: 1;
+      color: var(--tan); display: block; margin-bottom: 0.5rem;
+    }
+    .passion-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-style: italic; margin-bottom: 0.8rem;
+    }
+    .passion-body { font-size: 0.68rem; line-height: 1.9; color: var(--mid); }
+
+    /* MUSIC */
+    .music-wrap { display: grid; grid-template-columns: 1fr 2fr; }
+    .music-label-col {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--tan);
+      background: var(--dark); color: var(--cream);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .music-label-col .kicker { color: var(--tan); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
+    .music-label-col h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 900; line-height: 1.05; margin-top: auto;
+    }
+    .music-label-col h2 em { color: var(--rust); font-style: italic; }
+    .music-tracks { padding: 3rem 2.5rem; display: flex; flex-direction: column; }
+    .track {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1.2rem 0; border-bottom: 1px solid var(--tan);
+    }
+    .track:last-child { border-bottom: none; }
+    .track-num { font-size: 0.6rem; color: var(--tan); width: 1.5rem; flex-shrink: 0; }
+    .track-icon { font-size: 1.2rem; }
+    .track-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; }
+    .track-sub { font-size: 0.6rem; color: var(--mid); margin-top: 2px; }
+    .track-bar { margin-left: auto; height: 2px; background: var(--tan); flex-shrink: 0; }
+
+    /* PLACES */
+    .places-wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .place-card {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--tan);
+      position: relative; overflow: hidden;
+    }
+    .place-card:last-child { border-right: none; }
+    .place-flag { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .place-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .place-desc { font-size: 0.65rem; line-height: 1.8; color: var(--mid); }
+    .place-index {
+      position: absolute; bottom: 1rem; right: 1.2rem;
+      font-size: 3rem; font-family: 'Playfair Display', serif;
+      font-weight: 900; color: var(--tan); line-height: 1;
+    }
+
+    /* GOALS */
+    .goals-wrap { display: grid; grid-template-columns: 1fr 2fr; }
+    .goals-intro {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--tan);
+      background: var(--rust); color: var(--cream);
+    }
+    .goals-intro h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; line-height: 1.1; }
+    .goals-intro p { font-size: 0.65rem; margin-top: 1rem; line-height: 1.9; opacity: 0.85; }
+    .goals-list { padding: 3rem 2.5rem; display: flex; flex-direction: column; }
+    .goal-row {
+      display: flex; align-items: flex-start; gap: 1.5rem;
+      padding: 1.5rem 0; border-bottom: 1px solid var(--tan);
+    }
+    .goal-row:last-child { border-bottom: none; }
+    .goal-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; line-height: 1;
+      color: var(--tan); flex-shrink: 0; width: 2.5rem;
+    }
+    .goal-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; margin-bottom: 4px; }
+    .goal-body { font-size: 0.65rem; color: var(--mid); line-height: 1.8; }
+
+    /* BUCKET */
+    .bucket-wrap { padding: 3rem 2.5rem; }
+    .bucket-wrap h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; margin-bottom: 2rem; }
+    .bucket-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .bucket-item {
+      padding: 1.2rem 1.5rem;
+      border: 1px solid var(--tan);
+      margin: -1px 0 0 -1px;
+      font-size: 0.68rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      transition: background 0.2s, color 0.2s;
+      cursor: default;
+    }
+    .bucket-item:hover { background: var(--dark); color: var(--cream); }
+    .b-icon { font-size: 1rem; flex-shrink: 0; }
+
+    /* FOOTER */
+    footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+      font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { border-right: none; border-bottom: 1px solid var(--tan); padding: 8rem 1.5rem 3rem; }
+      .hero-right { padding: 2rem 1.5rem 3rem; }
+      .nav-inner { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .passions-grid { grid-template-columns: 1fr; }
+      .passion-cell { border-right: none; border-bottom: 1px solid var(--tan); }
+      .music-wrap { grid-template-columns: 1fr; }
+      .music-label-col { border-right: none; border-bottom: 1px solid var(--tan); }
+      .places-wrap { grid-template-columns: 1fr 1fr; }
+      .place-card:nth-child(2n) { border-right: none; }
+      .goals-wrap { grid-template-columns: 1fr; }
+      .goals-intro { border-right: none; border-bottom: 1px solid var(--tan); }
+      .bucket-grid { grid-template-columns: 1fr 1fr; }
+      .rule { padding: 0.6rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-logo">J.</span>
+      <div class="nav-links">
+        <a href="#passions">Passions</a>
+        <a href="#music">Music</a>
+        <a href="#places">Places</a>
+        <a href="#goals">Goals</a>
+        <a href="#bucket">Bucket List</a>
+      </div>
+      <span class="nav-issue">Personal Vol. 01</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <p class="issue-label">Issue No. 01 &nbsp;/&nbsp; About Me</p>
+      <h1 class="hero-title">
+        Just a<br/>
+        <em>student</em><br/>
+        figuring<br/>
+        it out.
+      </h1>
+      <div class="tag-strip">
+        <span class="tag">Creative</span>
+        <span class="tag">Developer</span>
+        <span class="tag">Curious</span>
+        <span class="tag">Dreamer</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <p class="hero-meta">Multimedia Development &nbsp;·&nbsp; 2025</p>
+      <blockquote class="pull-quote">
+        "I'm not defined by a résumé. I'm defined by what I stay up too late thinking about."
+      </blockquote>
+      <p style="font-size:0.68rem; line-height:1.9; color:var(--mid); max-width:360px;">
+        This page is a small slice of who I am beyond deadlines and class submissions. My passions, the music that plays on loop, the places I daydream about, and the goals I've written down so I actually chase them.
+      </p>
+      <p class="hero-meta" style="margin-top: auto;">↓ &nbsp; Scroll to read</p>
+    </div>
+  </div>
+
+  <!-- RULE -->
+  <div class="rule">
+    <span class="rule-line"></span>
+    Passions &amp; Interests
+    <span class="rule-line"></span>
+  </div>
+
+  <!-- PASSIONS -->
+  <section id="passions">
+    <div class="passions-grid">
+      <div class="passion-cell">
+        <span class="passion-num">01</span>
+        <p class="passion-title">Machine Learning/p>
+        <p class="passion-body">There's something deeply satisfying about how LLM's work ive been working hard enough to these mathematics classes to understand it HAHHAA</p>
+        <p class="passion-body" style="margin-top:1rem;">Currently learning how to make things not just functional, but actually beautiful.</p>
+      </div>
+      <div class="passion-cell">
+        <span class="passion-num">02</span>
+        <p class="passion-title">Running</p>
+        <p class="passion-body">Running just ease my mind and having personal goals without thinking of others pace is just fulfilling enough because you're on your own pace. Ang buhay ay di karera.</p>
+      </div>
+      <div class="passion-cell">
+        <span class="passion-num">03</span>
+        <p class="passion-title">Constant Learning</p>
+        <p class="passion-body">Rabbit holes, docs, random videos at 1am. I'm always absorbing something — on purpose or not.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULE -->
+  <div class="rule">
+    <span class="rule-line"></span>
+    On Rotation
+    <span class="rule-line"></span>
+  </div>
+
+  <!-- MUSIC -->
+  <section id="music">
+    <div class="music-wrap">
+      <div class="music-label-col">
+        <span class="kicker">Music</span>
+        <h2>What's<br/>always<br/><em>playing.</em></h2>
+      </div>
+      <div class="music-tracks">
+        <div class="track">
+          <span class="track-num">01</span>
+          <span class="track-icon">🌫️</span>
+          <div>
+            <p class="track-name">Lipstick Stain</p>
+            <p class="track-sub">for a hopeless romantic like me HAHAHA</p>
+          </div>
+          <div class="track-bar" style="width:80px;"></div>
+        </div>
+        <div class="track">
+          <span class="track-num">02</span>
+          <span class="track-icon">🎸</span>
+          <div>
+            <p class="track-name">Lifetime (Reimagined)</p>
+            <p class="track-sub">this song was just released and it just hit me in the right spot</p>
+          </div>
+          <div class="track-bar" style="width:60px;"></div>
+        </div>
+        <div class="track">
+          <span class="track-num">03</span>
+          <span class="track-icon">🎹</span>
+          <div>
+            <p class="track-name">Lux Aeterna</p>
+            <p class="track-sub">This is our competing piece in EAC Chorale this coming competition</p>
+          </div>
+          <div class="track-bar" style="width:100px;"></div>
+        </div>
+        <div class="track">
+          <span class="track-num">04</span>
+          <span class="track-icon">🎤</span>
+          <div>
+            <p class="track-name">Magnolia</p>
+            <p class="track-sub">My crush favorite song HAHAHA</p>
+          </div>
+          <div class="track-bar" style="width:50px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULE -->
+  <div class="rule">
+    <span class="rule-line"></span>
+    Dream Locations
+    <span class="rule-line"></span>
+  </div>
+
+  <!-- PLACES -->
+  <section id="places">
+    <div class="places-wrap">
+      <div class="place-card">
+        <span class="place-flag">🇯🇵</span>
+        <p class="place-name">Tokyo</p>
+        <p class="place-desc">Hyper-modern and deeply traditional at once. Drawn to the order, the food, the aesthetics everywhere you look.</p>
+        <span class="place-index">1</span>
+      </div>
+      <div class="place-card">
+        <span class="place-flag">🇵🇹</span>
+        <p class="place-name">Lisbon</p>
+        <p class="place-desc">Warm weather, tiled streets, slower pace. A city built for wandering and getting a little lost.</p>
+        <span class="place-index">2</span>
+      </div>
+      <div class="place-card">
+        <span class="place-flag">🇸🇬</span>
+        <p class="place-name">Singapore</p>
+        <p class="place-desc">Efficient, clean, full of tech opportunity — and the food alone is reason enough to move there.</p>
+        <span class="place-index">3</span>
+      </div>
+      <div class="place-card">
+        <span class="place-flag">🏔️</span>
+        <p class="place-name">Switzerland</p>
+        <p class="place-desc">Fast internet, cold air, good coffee, a view. The dream endgame — no specific country required.</p>
+        <span class="place-index">4</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULE -->
+  <div class="rule">
+    <span class="rule-line"></span>
+    Goals &amp; Aspirations
+    <span class="rule-line"></span>
+  </div>
+
+  <!-- GOALS -->
+  <section id="goals">
+    <div class="goals-wrap">
+      <div class="goals-intro">
+        <h2>Where I'm<br/>headed.</h2>
+        <p>Not a five-year plan. Just things I care about enough to write down and actually try to do.</p>
+      </div>
+      <div class="goals-list">
+        <div class="goal-row">
+          <span class="goal-n">1</span>
+          <div>
+            <p class="goal-title">Land a job in tech I'm genuinely proud of</p>
+            <p class="goal-body">Specifically Machine learning or AI — somewhere creative, collaborative, and not soul-crushing.</p>
+          </div>
+        </div>
+        <div class="goal-row">
+          <span class="goal-n">2</span>
+          <div>
+            <p class="goal-title">Build something people actually use</p>
+            <p class="goal-body">A side project, an app, a tool — something real that solves a real problem for real people.</p>
+          </div>
+        </div>
+        <div class="goal-row">
+          <span class="goal-n">3</span>
+          <div>
+            <p class="goal-title">Reach financial freedom early</p>
+            <p class="goal-body">Not rich-rich. Just free enough to make decisions based on what I want, not only what pays.</p>
+          </div>
+        </div>
+        <div class="goal-row">
+          <span class="goal-n">4</span>
+          <div>
+            <p class="goal-title">Never stop being curious</p>
+            <p class="goal-body">The worst version of myself is a comfortable, complacent one. Always more to learn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULE -->
+  <div class="rule">
+    <span class="rule-line"></span>
+    Before I'm 30
+    <span class="rule-line"></span>
+  </div>
+
+  <!-- BUCKET LIST -->
+  <section id="bucket">
+    <div class="bucket-wrap">
+      <h2>The Bucket List.</h2>
+      <div class="bucket-grid">
+        <div class="bucket-item"><span class="b-icon">🌏</span> Travel solo to a foreign country</div>
+        <div class="bucket-item"><span class="b-icon">🎤</span> Speak in front of a real crowd</div>
+        <div class="bucket-item"><span class="b-icon">🌊</span> Learn how to surf</div>
+        <div class="bucket-item"><span class="b-icon">🚀</span> Ship a product with 1,000+ users</div>
+        <div class="bucket-item"><span class="b-icon">🌄</span> Watch sunrise from a mountain peak</div>
+        <div class="bucket-item"><span class="b-icon">📷</span> Fill a whole photo album from travels</div>
+        <div class="bucket-item"><span class="b-icon">☕</span> Have a regular café I call "my spot"</div>
+        <div class="bucket-item"><span class="b-icon">🏠</span> Live alone for at least a year</div>
+        <div class="bucket-item"><span class="b-icon">📚</span> Run a full marathon HAHAHA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:0.9rem; text-transform:none; letter-spacing:0;">Jerome.</span>
+    <span>Multimedia Development — Personal Activity</span>
+    <span>© 2025</span>
+  </footer>
+
+</body>
+</html>
